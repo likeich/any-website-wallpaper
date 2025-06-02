@@ -7,7 +7,6 @@
         <script>
             const params = new URLSearchParams(location.search);
             const rawTarget = params.get("url") || "";
-            const extra = params.get("params") || "";
 
             if (!rawTarget) {
                 document.addEventListener("DOMContentLoaded", () => {
@@ -26,7 +25,7 @@
             <h1>Error</h1>
             <p>Missing <code>url</code> parameter.</p>
             <p>Example usage:</p>
-            <p><code>index.html?url=https%3A%2F%2Fexample.com</code></p>
+            <p><code>index.html?url=https%3A%2F%2Fexample.com%3Ffoo%3Dbar%26baz%3Dqux</code></p>
           </div>
         `;
                 });
@@ -35,13 +34,7 @@
                     ? rawTarget
                     : "https://" + rawTarget;
 
-                let destination = normalized;
-                if (extra) {
-                    destination +=
-                        (normalized.includes("?") ? "&" : "?") + extra;
-                }
-
-                window.location.replace(destination);
+                window.location.replace(normalized);
             }
         </script>
     </head>
