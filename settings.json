@@ -1,0 +1,17 @@
+{
+  "options": [
+    {
+      "type": "text",
+      "name": "Website URL",
+      "key": "url",
+      "defaultValue": ""
+    },
+    {
+      "type": "text",
+      "name": "Extra URL Parameters",
+      "key": "params",
+      "defaultValue": "",
+      "description": "e.g. foo=bar&baz=qux (will be appended to the URL)"
+    }
+  ]
+}

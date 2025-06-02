@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Redirecting…</title>
+        <script>
+            const params = new URLSearchParams(location.search);
+            const rawTarget = params.get("url") || "";
+            const extra = params.get("params") || "";
+
+            if (!rawTarget) {
+                document.addEventListener("DOMContentLoaded", () => {
+                    document.body.style.cssText = `
+          margin:0;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          height:100vh;
+          background:#000;
+          color:#fff;
+          font-family:sans-serif;
+        `;
+                    document.body.innerHTML = `
+          <div style="text-align:center;">
+            <h1>Error</h1>
+            <p>Missing <code>url</code> parameter.</p>
+            <p>Example usage:</p>
+            <p><code>index.html?url=https%3A%2F%2Fexample.com</code></p>
+          </div>
+        `;
+                });
+            } else {
+                const normalized = /^https?:\/\//i.test(rawTarget)
+                    ? rawTarget
+                    : "https://" + rawTarget;
+
+                let destination = normalized;
+                if (extra) {
+                    destination +=
+                        (normalized.includes("?") ? "&" : "?") + extra;
+                }
+
+                window.location.replace(destination);
+            }
+        </script>
+    </head>
+    <body></body>
+</html>
